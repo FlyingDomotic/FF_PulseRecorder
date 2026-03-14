@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<!-- Main page of pulse counter recorder -->
+	<head>
+		<meta charset="utf-8" />
+		<title>Pulse counter recorder</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <script src="translate.js"></script>
+        <script src="logic.js"></script>
+        <script>
+            function loadEdit() {window.location.href = "./edit.htm";}      // Display edit page
+            function loadSetup() {window.location.href = "./setup.htm";}    // Display setup page
+            function $id(name) {return document.getElementById(name);}      // Return an element by id
+            function hideCb(object, divName) {$id(divName).hidden = (object.checked == false);} // Hide div if checkbox not ticked
+        </script>
+	</head>
+    <body onload="initAll(false);">
+        <div id="header" class="header">
+            <label id="serverName"></label>&nbsp;<label id="serverVersion"></label><br>
+            <hr />
+        </div>
+        <div class="center">
+			<fieldset>
+                <input type="button" class="blueBtn" style="width:175px" data-i18n-key="start" id="start" value="Start" onclick="changed(this);"/>
+                &nbsp;&nbsp;&nbsp;
+                <label id="date"></label>
+                &nbsp;&nbsp;&nbsp;
+                <input type="button" class="blueBtn" style="width:175px" data-i18n-key="stop" id="stop"  value="Stop" onclick="changed(this);"/>
+                <br>
+                <table align="center">
+                    <tr>
+                        <th></th>
+                        <th><label data-i18n-key="elapsed">Elapsed</label></th>
+                        <th><label data-i18n-key="pulses">Pulses</label></th>
+                        <th><label data-i18n-key="pulsesPerSec">Pulses/s</label></th>
+                    </tr>
+                    <tr>
+                        <td align="right"><label data-i18n-key="global">Global</label></td>
+                        <td><label id="elapsedTime"></label></td>
+                        <td><label id="elapsedPulse"></label></td>
+                        <td><label id="elapsedAverage"></label></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label data-i18n-key="lastCollect">Last collect</label></td>
+                        <td><label id="collectTime"></label></td>
+                        <td><label id="collectPulse"></label></td>
+                        <td><label id="collectAverage"></label></td>
+                    </tr>
+                </table>
+                <br>
+            </fieldset>
+            <br>
+            <input type="button" class="blueBtn" style="width:175px" data-i18n-key="setup" value="Setup" onclick="loadSetup();"/>
+                &nbsp;&nbsp;&nbsp;
+                <input type="button" class="blueBtn" style="width:175px" data-i18n-key="edit" value="Edit" onclick="loadEdit();"/>
+        </div>
+        <div class="center">
+            <label id="wifiState"></label>
+            <br>
+            <label data-i18n-key="freeMemory"></label>&nbsp;<label id="freeMemory"></label>
+            &nbsp;&nbsp;&nbsp;<label data-i18n-key="largestChunk"></label>&nbsp;<label id="largestChunk"></label>
+            <br>
+            <label data-i18n-key="usedSpace"></label>&nbsp;<label id="usedPercentage"></label>%
+            <br>
+            <label data-i18n-key="recordCount"></label>&nbsp;<label id="recordCount"></label>
+        </div>
+        <hr />
+        <div id="messages" class="largeScroll, center"></div>
+    </body>
+</html>

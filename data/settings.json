@@ -1,0 +1,19 @@
+{
+  "ssid": "",
+  "pwd": "",
+  "accessPointPwd": "",
+  "name": "Compteur",
+  "traceEnter": false,
+  "traceDebug": true,
+  "traceVerbose": false,
+  "traceJava": false,
+  "traceSyslog": false,
+  "serverLanguage": "fr",
+  "syslogServer": "",
+  "syslogPort": 514,
+  "ntpServer": "server 0.fr.pool.ntp.org",
+  "ntpParameters": "CET-1CEST,M3.5.0,M10.5.0/3",
+  "collectInterval": 1000,
+  "fileWriteInterval": 60000,
+  "noPulseCollectCount": 5
+}

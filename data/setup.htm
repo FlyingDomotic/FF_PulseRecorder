@@ -1,0 +1,101 @@
+<!-- Page to setup pulse counter -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Configuration du compteur d'impulsions</title>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+		<script src="translate.js"></script>
+		<script src="logic.js"></script>
+	</head>
+	<body onload="initAll(false);">
+        <div id="header" class="header">
+            <label id="serverName"></label>&nbsp;<label id="serverVersion"></label><br>
+            <hr />
+        </div>
+        <!-- Language selector (default to user's first prefered language matching those available (en,fr), (en) else) -->
+		<div class="center">
+			<label data-i18n-key="languageSelector">Language </label>&nbsp;
+			<select data-i18n-switcher class="locale-switcher">
+				<option value="en">English</option>
+				<option value="fr">Français</option>
+			</select>
+            <hr />
+        </div>
+        <div class="center">
+			<!-- Display and set various variables saved settings.json -->
+            <hr />
+            <table align="center">
+                <tr>
+                    <td align="right"><label data-i18n-key="collectInterval">Collect interval (ms):</label>&nbsp;</td>
+                    <td><input type="number" id="collectInterval" size="9" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="fileWriteInterval">File write interval (ms):</label>&nbsp;</td>
+                    <td><input type="number" id="fileWriteInterval" size="9" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="noPulseCollectCount">Collect count without pulse before stopping:</label>&nbsp;</td>
+                    <td><input type="number" id="noPulseCollectCount" size="9" onchange="changed(this);"/></td>
+                </tr>
+               <tr>
+                    <td align="right"><label data-i18n-key="ssid">Wifi SSID:</label>&nbsp;</td>
+                    <td><input type="text" id="ssid" maxlen="32" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="pwd">Password:</label>&nbsp;</td>
+                    <td><input type="text" id="pwd" minlength="8" maxlen="32" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="accessPointPwd">Access Point password:</label>&nbsp;</td>
+                    <td><input type="text" id="accessPointPwd" minlength="8" maxlen="32" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="name">Module name:</label>&nbsp;</td>
+                    <td><input type="text" id="name" maxlen="32" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="syslogServer">Syslog server:</label>&nbsp;</td>
+                    <td><input type="text" id="syslogServer" maxlen="64" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="syslogPort">Syslog port:</label>&nbsp;</td>
+                    <td><input type="number" id="syslogPort" size="6" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="ntpServer">NTP server:</label>&nbsp;</td>
+                    <td><input type="text" id="ntpServer" maxlen="64" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="ntpParameters">NTP parameters:</label>&nbsp;</td>
+                    <td><input type="text" id="ntpParameters" maxlen="64" size="32" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="traceEnter">Display routine entering</label>&nbsp;</td>
+                    <td><input type="checkbox" id="traceEnter" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="traceDebug">Display debug messages</label>&nbsp;</td>
+                    <td><input type="checkbox" id="traceDebug" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="traceVerbose">Display verbose messages</label>&nbsp;</td>
+                    <td><input type="checkbox" id="traceVerbose" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="traceJava">Display Java traces</label>&nbsp;</td>
+                    <td><input type="checkbox" id="traceJava" onchange="changed(this);"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label data-i18n-key="traceSyslog">Send trace to syslog</label>&nbsp;</td>
+                    <td><input type="checkbox" id="traceSyslog" onchange="changed(this);"/></td>
+                </tr>
+            </table>
+            <br>
+            <input type="button" class="blueBtn" style="width:175px" data-i18n-key="restart" id="restart" value="restart" onclick="changed(this);"/>
+			<hr />
+		</div>
+        <div id="messages" class="largeScroll center"></div>
+		<hr />
+	</body>
+</html>
