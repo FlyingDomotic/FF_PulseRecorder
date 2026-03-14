@@ -1,4 +1,4 @@
-#define VERSION "26.3.15-1"
+#define VERSION "26.3.15-2"
 
 /*
  *     English: Pulse counter recorder
@@ -459,7 +459,7 @@ void writeFile(void) {
                 memoryPtr = 0;                                      // Reset memory array pointer
                 return;
             }
-            outStream.printf("Milliseconds;Pulses\n");              // Write header
+            outStream.printf("Milliseconds\tPulses\n");              // Write header
             outStream.flush();                                      // Flush file
             outStream.close();                                      // Close file
             collectFileInited = true;                               // We inited file
@@ -475,7 +475,7 @@ void writeFile(void) {
             return;
         }
         for (uint16_t i = 0; i < memoryPtr; i++) {                  // Dump all stored data
-            outStream.printf_P("%lu;%lu\n",                         // Compose line
+            outStream.printf_P("%lu\t%lu\n",                         // Compose line
                 memoryArray[i].elapsedTime,
                 memoryArray[i].elapsedValue);
             recordCount++;                                          // Update record count
