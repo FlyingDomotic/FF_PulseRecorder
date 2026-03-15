@@ -1,4 +1,4 @@
-#define VERSION "26.3.15-2"
+#define VERSION "26.3.15-3"
 
 /*
  *     English: Pulse counter recorder
@@ -49,6 +49,18 @@
  *  GNU GENERAL PUBLIC LICENSE - Version 3, 29 June 2007
  *
  */
+
+#ifndef INTERRUPT_PIN
+    #define INTERRUPT_PIN D2
+#endif
+
+#ifndef INTERRUPT_PIN_MODE
+    #define INTERRUPT_PIN_MODE INPUT
+#endif
+
+#ifndef INTERRUPT_PIN_LEVEL
+    #define INTERRUPT_PIN_LEVEL FAILLING
+#endif
 
 #include <arduino.h>                                                // Arduino
 #include <ArduinoJson.h>                                            // JSON documents
@@ -313,12 +325,9 @@ bool isDebugCommand(const String givenCommand);
 
 // Init pulse data
 void pulseSetup(void) {
-    pinMode(INTERRUPT_PIN, INPUT);                                  // Set INPUT mode (external 10K pullup)
-    #ifdef INTERRUPT_PIN_LEVEL_LOW                                  // Is pin active at low state?
-        attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), pulseDownCallback, FALLING);
-    #else                                                           // Pin is active at high state
-        attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), pulseDownCallback, RISING);
-    #endif
+    pinMode(INTERRUPT_PIN, INTERRUPT_PIN_MODE);                     // Set INPUT mode (external 10K pullup)
+    attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN),           // Set interrupt PIN
+        pulseDownCallback, INTERRUPT_PIN_LEVEL);                    /// ... With callback and level
 }
 
 // Pulse loop
@@ -1743,7 +1752,11 @@ void setup(void) {
         #else
             trace_info_P("Creating %s access point (%s)", buffer, accessPointPwd.c_str());
         #endif
-        WiFi.softAP(buffer, accessPointPwd.c_str());                // Starts Wifi access point
+        if (accessPointPwd) {                                       // Starts Wifi access point
+            WiFi.softAP(buffer, accessPointPwd.c_str());            // ... with password
+        } else {
+            WiFi.softAP(buffer);                                    // ... without password
+        }
         #ifdef VERSION_FRANCAISE
             trace_info_P("Connexion à %s par http://%s/", buffer, WiFi.softAPIP().toString().c_str());
             snprintf_P(buffer, sizeof(buffer), "Point d'accès %s actif (%s)",

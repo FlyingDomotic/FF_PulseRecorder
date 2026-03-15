@@ -6,7 +6,7 @@
     "name": "Module name",
     "pwd": "Password",
     "setup": "Setup",
-    "ssid": "Wifi SSID",
+    "ssid": "WiFi SSID",
     "accessPointPwd": "Access Point password",
     "ntpServer": "NTP server:",
     "ntpParameters": "NTP parameters:",
